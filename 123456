@@ -21,7 +21,7 @@ class Quest:
         if not self.start_time:
             return 'Нельзя завершить то, что не имеет начала!'
         self.start_time = dt.datetime.now
-        completion_time = self.end_time - self.start_time
+        completion_time = self.end_time() - self.start_time()
         return (f'Квест "{self.name}" окончен. '
                 f'Время выполнения квеста: {completion_time}')
 quest_name = 'Сбор пиксельники'
