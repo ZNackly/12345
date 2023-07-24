@@ -1,26 +1,26 @@
-import datetime 
+import datetime as dt
 import time
 class Quest:
-    def __init__(self, name, description, goal,start_time,end_time):
+    def __init__(self, name, description, goal):
         self.name = name
         self.description = description
         self.goal = goal
         # Допишите два свойства класса.
-        self.start_time =start_time
-        self.end_time =end_time
+        self.start_time = None
+        self.end_time = None
 
     # Напишите методы приема и сдачи квеста.
     def accept_quest(self):
-        if self.end_time!=0:
+        if self.end_time:
             return 'С этим испытанием вы уже справились.'
-        self.start_time=time.time()
+        self.start_time=dt.datetime.now()
         return f'Начало "{self.name}" положено.'
 
 
     def pass_quest(self):
-        if self.start_time==0:
+        if not self.start_time:
             return 'Нельзя завершить то, что не имеет начала!'
-        self.end_time = time.time()
+        self.end_time = dt.datetime.now()
         completion_time = self.end_time-self.start_time
         return (f'Квест "{self.name}" окончен. '
                 f'Время выполнения квеста: {completion_time}')
@@ -33,7 +33,7 @@ quest_description = '''
 Она нужна для приготовления целебных снадобий.
 Соберите 12 ягод пиксельники.'''
 
-new_quest = Quest(quest_name, quest_description, quest_goal,0,0) 
+new_quest = Quest(quest_name, quest_description, quest_goal) 
 print(new_quest.pass_quest())
 print(new_quest.accept_quest())
 time.sleep(3)
